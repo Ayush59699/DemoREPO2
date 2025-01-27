@@ -16,7 +16,9 @@ class handler(BaseHTTPRequestHandler):
 
         marks = [name_to_marks.get(n, "Not Found") for n in names]
 
+        response = json.dumps({"marks": marks})
+
         self.send_response(200)
-        self.send_header("Content-type", "application/json")
+        self.send_header("Content-Type", "application/json")
         self.end_headers()
-        self.wfile.write(json.dumps({"marks": marks}).encode("utf-8"))
+        self.wfile.write(response.encode("utf-8"))
